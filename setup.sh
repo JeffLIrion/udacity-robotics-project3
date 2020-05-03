@@ -5,7 +5,7 @@ RUN_CATKIN=false
 
 
 # 1. Overview
-if [ "$CATKIN_RUN" == true ]; then
+if [ "$RUN_CATKIN" == true ]; then
   sudo apt install ros-kinetic-navigation ros-kinetic-map-server ros-kinetic-move-base ros-kinetic-amcl
 fi
 
@@ -21,12 +21,12 @@ if [ ! -d "$SCRIPT_ROOT_DIRECTORY/catkin_ws/src" ]; then
 fi
 
 cd "$SCRIPT_ROOT_DIRECTORY/catkin_ws/src"
-if [ "$CATKIN_RUN" == true ]; then
+if [ "$RUN_CATKIN" == true ]; then
   catkin_init_workspace
 fi
 
 cd "$SCRIPT_ROOT_DIRECTORY/catkin_ws"
-if [ "$CATKIN_RUN" == true ]; then
+if [ "$RUN_CATKIN" == true ]; then
   catkin_make
   source devel/setup.bash
 fi
@@ -34,12 +34,12 @@ fi
 
 # 3. Map setup
 mkdir -p "$SCRIPT_ROOT_DIRECTORY/catkin_ws/src/my_robot/maps"
-if [ "$CATKIN_RUN" == true ]; then
+if [ "$RUN_CATKIN" == true ]; then
   sudo apt install libignition-math2-dev protobuf-compiler
 fi
 
 cd "$SCRIPT_ROOT_DIRECTORY/catkin_ws/src"
-if [ "$CATKIN_RUN" == true ]; then
+if [ "$RUN_CATKIN" == true ]; then
   rm -rf "$SCRIPT_ROOT_DIRECTORY/catkin_ws/src/pgm_map_creator"
   git clone https://github.com/udacity/pgm_map_creator.git
 
@@ -63,10 +63,6 @@ cd "$SCRIPT_ROOT_DIRECTORY/catkin_ws"
 
 # Add the map to your package
 mkdir -p "$SCRIPT_ROOT_DIRECTORY/catkin_ws/src/my_robot/maps"
-if [ -f "$SCRIPT_ROOT_DIRECTORY/catkin_ws/src/pgm_map_creator/maps/map.pgm" ]; then
-  cp "$SCRIPT_ROOT_DIRECTORY/catkin_ws/src/pgm_map_creator/maps/map.pgm" "$SCRIPT_ROOT_DIRECTORY/catkin_ws/src/my_robot/maps/myworld.pgm"
-fi
-
 if [ ! -f "$SCRIPT_ROOT_DIRECTORY/catkin_ws/src/my_robot/maps/myworld.pgm" ]; then
   git add "$SCRIPT_ROOT_DIRECTORY/catkin_ws/src/my_robot/maps/myworld.pgm"
 fi
@@ -123,7 +119,7 @@ fi
 
 # 9. Teleop package (optional)
 
-if [ "$CATKIN_RUN" == true ]; then
+if [ "$RUN_CATKIN" == true ]; then
   cd "$SCRIPT_ROOT_DIRECTORY/catkin_ws/src"
   git clone https://github.com/ros-teleop/teleop_twist_keyboard
   cd "$SCRIPT_ROOT_DIRECTORY/catkin_ws"
@@ -136,7 +132,7 @@ fi
 
 
 # Create a main package with a main.launch
-if [ "$CATKIN_RUN" == true ]; then
+if [ "$RUN_CATKIN" == true ]; then
   cd "$SCRIPT_ROOT_DIRECTORY/catkin_ws/src"
   catkin_create_pkg main
 
