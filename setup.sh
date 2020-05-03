@@ -16,6 +16,7 @@ cd "$SCRIPT_ROOT_DIRECTORY/catkin_ws"
 if [ ! -d "$SCRIPT_ROOT_DIRECTORY/catkin_ws/src" ]; then
   git clone https://github.com/JeffLIrion/udacity-robotics-project2.git src
   rm -rf "$SCRIPT_ROOT_DIRECTORY/catkin_ws/src/.git"
+  sed -i 's|<node name="rviz" pkg="rviz" type="rviz" respawn="false"/>|<node name="rviz" pkg="rviz" type="rviz" respawn="false" args="-d \$(find my_robot)/../Project3.rviz"/>|g' "$SCRIPT_ROOT_DIRECTORY/catkin_ws/src/my_robot/launch/world.launch"
   git add src
 fi
 
