@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="package_path" default="$(find my_robot)"/>
+
+  <!--RVIZ-->
+  <node pkg="rviz" type="rviz" name="rviz" args="-d $(arg package_path)/../Project3.rviz"/>
+</launch>

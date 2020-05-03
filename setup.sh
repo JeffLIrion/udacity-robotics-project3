@@ -64,6 +64,9 @@ cd "$SCRIPT_ROOT_DIRECTORY/catkin_ws"
 mkdir -p "$SCRIPT_ROOT_DIRECTORY/catkin_ws/src/my_robot/maps"
 if [ -f "$SCRIPT_ROOT_DIRECTORY/catkin_ws/src/pgm_map_creator/maps/map.pgm" ]; then
   cp "$SCRIPT_ROOT_DIRECTORY/catkin_ws/src/pgm_map_creator/maps/map.pgm" "$SCRIPT_ROOT_DIRECTORY/catkin_ws/src/my_robot/maps/myworld.pgm"
+fi
+
+if [ ! -f "$SCRIPT_ROOT_DIRECTORY/catkin_ws/src/my_robot/maps/myworld.pgm" ]; then
   git add "$SCRIPT_ROOT_DIRECTORY/catkin_ws/src/my_robot/maps/myworld.pgm"
 fi
 
@@ -88,6 +91,7 @@ fi
 if [ ! -f "$SCRIPT_ROOT_DIRECTORY/catkin_ws/src/my_robot/launch/amcl.launch" ]; then
 (
 cat <<-EOF
+<?xml version="1.0"?>
 <launch>
   <!-- TODO: Add nodes here -->
 </launch>
